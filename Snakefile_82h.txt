@@ -1,0 +1,120 @@
+SAMPLES = ['DC19_Fda1','DC20_Fda2','DC21_Fda3','DC22_FUA1','DC23_FUA2','DC24_FUA3']
+
+rule all:
+        input:
+                expand("{sample}/{sample}.trim.fastq.hisat2.bam.count", sample=SAMPLES)
+
+#rule pre_QC:
+#	input:
+#		"{sample}/{sample}.fastq.gz"
+#	output:
+#		"{sample}.html"
+#		"{sample}.zip"
+#	shell:
+#		fastqc *.fastq --noextract --quiet --outdir {sample}/
+
+#--noextract don't unzip, --quiet don't show progressing messages, --outdir the directory to store output files
+
+
+rule trim:
+	input:
+		"{sample}/{sample}.fastq.gz"
+	output:
+		"{sample}/{sample}.trim.fastq.gz"
+	log:
+		"{sample}/{sample}.trim.txt"
+	shell:
+		"cutadapt -a AGATCGGAAGAGC --quality-cutoff 20 --minimum-length 25 --overlap 10 --output {output} {input} &> {log}"
+
+		## -a To trim a 3’ adapter
+		## --overlap 10  at least ten bases match between adapter and read to be trimmed  
+		## ------***********agctgatcgatcgctagagctagatcgaAAAAAAAAAAA  ??
+
+
+#rule hisat2:
+#	input:
+#		"/data/chend8/references/reference_with_chro/dm6.fasta"   ## need to use depressed fasta
+#	output:
+#		"/data/chend8/references/reference_with_chro/dm6"
+#	shell:
+#		"hisat2-build {input} {output}"
+       	
+
+rule alignment:
+	input:
+		"{sample}/{sample}.trim.fastq.gz"
+	output:
+		"{sample}/{sample}.trim.fastq.hisat2.bam"
+	log: 
+		"{sample}/{sample}.trim.fastq.hisat2.log"
+	
+	shell:
+		"hisat2 "
+		"-x /data/chens19/datashare/Dahong/references/r6-28/hisat2/dmel_r6-28 "  # prefix of indices
+		"-U /data/chens19/datashare/Dahong/RNAseq/82h/{input} "
+		"-p 8 "  # threads
+		"-S {output}.sam "
+		"&> {log}"
+		"&& samtools view -Sb {output}.sam -F 0x04 > {output}.bam.tmp " 
+		# -b Output in the BAM format
+		# -S Ignored for compatibility with previous samtools versions. Previously this option was required if input was in SAM format, but now the correct format is automatically detected by examining the first few characters of input
+		# -F Do not output alignments with any bits set in INT present in the FLAG field. INT can be specified in hex by beginning with `0x' (i.e. /^0x[0-9A-F]+/) or in octal by beginning with `0' (i.e. /^0[0-7]+/) [0]. 
+		"&& samtools sort -@ {threads} -T {output}.sorting -o {output} {output}.bam.tmp " # why 8 threads, why {output.sorting}, why bam.tmp if will be removed
+		# -T PREFIX    Write temporary files to PREFIX.nnnn.bam. This option is required. 
+
+		"&& rm -v {output}.sam {output}.bam.tmp" # Normally, no output is produced by rm, since it typically only generates messages in the event of an error. The -v option can be used to get rm to detail successful removal actions.
+
+		
+
+rule bam_index:
+	input:
+		"{sample}/{sample}.trim.fastq.hisat2.bam"
+	output:
+		"{sample}/{sample}.trim.fastq.hisat2.bam.bai"
+		
+	shell:
+		"samtools index {input}"
+		# Index a coordinate-sorted BAM or CRAM file for fast random access. This index is needed when region arguments are used to limit samtools view and similar commands to particular regions of interest. 	
+
+
+rule bam_count:
+	input:
+		"{sample}/{sample}.trim.fastq.hisat2.bam"
+	output:
+		"{sample}/{sample}.trim.fastq.hisat2.bam.count"
+	shell:
+		"samtools view -c {input} > {output}"
+		
+		# -c  Instead of printing the alignments, only count them and print the total number. All filter options, such as -f, -F, and -q, are taken into account. 
+
+rule featurecounts:
+	input:
+		annotation="/data/chens19/datashare/Dahong/references/r6-28/gtf/original/dmel_r6-28.gtf",
+		bam= "/data/chens19/datashare/Dahong/RNAseq/82h/{sample}/{sample}.trim.fastq.hisat2.bam"
+	output:
+		full="/data/chens19/datashare/Dahong/RNAseq/82h/{sample}/{sample}.featurecounts.full",
+		counts="/data/chens19/datashare/Dahong/RNAseq/82h/{sample}/{sample}.featurecounts",
+	log: "/data/chens19/datashare/Dahong/RNAseq/82h/{sample}/{sample}.featurecounts.log"
+	shell:
+		#"module load subread; "
+		#"/data/chend8/BG3chemical/subread-1.5.2-Linux-x86_64/bin/featureCounts "
+		"featureCounts "
+		"-a {input.annotation} "
+		"-o {output.full} "
+		"-s 1 -t exon -g gene_id "  # -s 1 strand specific
+		"{input.bam} > {log} 2> {log} &&  "
+	        "cut -f 1,7 {output.full} | tail -n +3 | sort > {output.counts} "
+
+		# featureCounts is a highly efficient general-purpose read summarization program that counts mapped reads for genomic features such as genes, exons, promoter, gene bodies, genomic bins and chromosomal locations.
+		
+		# for 18h_48h FACS neuron RNAseq, move all bam files into the same folder and run the following
+		# featureCounts -a /data/chend8/references/reference_with_chro/dm6.gtf *18h*.bam -o featureCounts_18h.full -s 1 -t exon -g gene_id 
+
+
+# vim: set number
+# vim: ft=python
+
+## "vim:" tell vim to do something when open the file
+
+# vim: number
+# vim: ft=python	
