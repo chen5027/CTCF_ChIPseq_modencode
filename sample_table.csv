@@ -1,0 +1,12 @@
+SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,ControlID,bamControl,Peaks,PeakCaller
+DC8774_1,rod,control,control,control,1,DC8774_1_S1_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_1_q0.1_chro_peaks.narrowPeak,bed
+DC8774_2,rod,control,control,control,2,DC8774_2_S2_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_2_q0.1_chro_peaks.narrowPeak,bed
+DC8774_3,rod,control,control,control,3,DC8774_3_S3_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_3_q0.1_chro_peaks.narrowPeak,bed
+DC8774_4,rod,control,control,control,4,DC8774_4_S4_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_4_q0.1_chro_peaks.narrowPeak,bed
+DC8774_5,rod,control,control,control,5,DC8774_5_S5_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_5_q0.1_chro_peaks.narrowPeak,bed
+DC8774_6,rod,control,control,control,6,DC8774_6_S6_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_6_q0.1_chro_peaks.narrowPeak,bed
+DC8774_7,rod,control,control,control,7,DC8774_7_S7_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_7_q0.1_chro_peaks.narrowPeak,bed
+DC8774_8,rod,control,control,control,8,DC8774_8_S8_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_8_q0.1_chro_peaks.narrowPeak,bed
+DC8774_9,rod,ko,ko,ko,1,DC8774_9_S9_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_9_q0.1_chro_peaks.narrowPeak,bed
+DC8774_10,rod,ko,ko,ko,2,DC8774_10_S10_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_10_q0.1_chro_peaks.narrowPeak,bed
+DC8774_11,rod,ko,ko,ko,3,DC8774_11_S11_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8774_11_q0.1_chro_peaks.narrowPeak,bed
