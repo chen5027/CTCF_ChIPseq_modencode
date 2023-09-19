@@ -1,0 +1,16 @@
+SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,ControlID,bamControl,Peaks,PeakCaller
+DC8775_1,RGC,P0,P0,P0,1,DC8775_1_S12_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_1_q0.1_chro_peaks.narrowPeak,bed
+DC8775_2,RGC,P0,P0,P0,2,DC8775_2_S13_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_2_q0.1_chro_peaks.narrowPeak,bed
+DC8775_3,RGC,P0,P0,P0,3,DC8775_3_S14_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_3_q0.1_chro_peaks.narrowPeak,bed
+DC8775_4,RGC,P0,P0,P0,4,DC8775_4_S15_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_4_q0.1_chro_peaks.narrowPeak,bed
+DC8775_5,RGC,P2,P2,P2,1,DC8775_5_S16_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_5_q0.1_chro_peaks.narrowPeak,bed
+DC8775_6,RGC,P2,P2,P2,2,DC8775_6_S17_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_6_q0.1_chro_peaks.narrowPeak,bed
+DC8775_7,RGC,P2,P2,P2,3,DC8775_7_S18_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_7_q0.1_chro_peaks.narrowPeak,bed
+DC8775_8,RGC,P2,P2,P2,4,DC8775_8_S19_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_8_q0.1_chro_peaks.narrowPeak,bed
+DC8775_9,RGC,P4,P4,P4,1,DC8775_9_S20_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_9_q0.1_chro_peaks.narrowPeak,bed
+DC8775_10,RGC,P4,P4,P4,2,DC8775_10_S21_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_10_q0.1_chro_peaks.narrowPeak,bed
+DC8775_11,RGC,P4,P4,P4,3,DC8775_11_S22_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_11_q0.1_chro_peaks.narrowPeak,bed
+DC8775_12,RGC,P4,P4,P4,4,DC8775_12_S23_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_12_q0.1_chro_peaks.narrowPeak,bed
+DC8775_13,RGC,P6,P6,P6,1,DC8775_13_S24_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_13_q0.1_chro_peaks.narrowPeak,bed
+DC8775_14,RGC,P6,P6,P6,2,DC8775_14_S25_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_14_q0.1_chro_peaks.narrowPeak,bed
+DC8775_15,RGC,P6,P6,P6,3,DC8775_15_S26_mitoMinus_uniq_nodup.150bp.bam,,,MACS2/DC8775_15_q0.1_chro_peaks.narrowPeak,bed
